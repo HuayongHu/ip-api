@@ -1,5 +1,4 @@
-# get-uesr-s-ip
-# ip api
+# ip-api
 利用Cloudflare的workers功能返回用户/访客的IP地址，形成一个可以使用的API。
 返回的数据类型为Json格式，使用get方法进行访问即可。
 您可以直接调用本站搭建的服务：https://ip.011102.xyz，已经允许所有跨域
