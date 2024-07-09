@@ -57,13 +57,28 @@ export default {
     }
     }
 
-    var dataJson = JSON.stringify(data, null, 4);
-    console.log(dataJson);
+  var dataJson = JSON.stringify(data, null, 4);
+  console.log(dataJson);
+   // 设置 CORS 头部
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": "*", // * 表示允许任何域名的跨域请求
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Max-Age": "86400", // 24小时，减少预检请求的频率
+    };
+    // 如果是 OPTIONS 请求，则直接返回204，这是预检请求的处理
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+        status: 204,
+        headers: corsHeaders,
+      });
+    }
 
-    return new Response(dataJson, {
+return new Response(dataJson, {
       headers: {
-        "Content-Type": "application/json;charset=UTF-8"
-      }
-    })
+        "Content-Type": "application/json;charset=UTF-8",
+        ...corsHeaders, // 展开(corsHeaders)以添加所有 CORS 相关的头部
+      },
+    });
   }
 };
